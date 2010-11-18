@@ -21,7 +21,7 @@ def main(args):
   parser.add_option("--regex", dest="regex", metavar="REGEX",
                     help="Only consider keys matching this REGEX")
   parser.add_option("--delete", dest="delete", metavar="REGEX", action="store_true",
-                    default=False, help="Only consider keys matching this REGEX")
+                    default=False, help="Actually do a delete. If not specified, just list the keys found that match.")
   (config, args) = parser.parse_args(args)
 
   config_ok = True
