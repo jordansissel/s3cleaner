@@ -1,0 +1,6 @@
+The first few hits on google for 's3 delete older than' are "How do I do this?"
+with no answers...
+
+So, here's a script that will clean old s3 entries that match a pattern.
+
+Requires boto.
