@@ -20,12 +20,14 @@ def main(args):
                     help="Max age a key(file) can have before we want to delete it")
   parser.add_option("--regex", dest="regex", metavar="REGEX",
                     help="Only consider keys matching this REGEX")
+  parser.add_option("--bucket", dest="bucket", metavar="BUCKET",
+                    help="Search for keys in a specific bucket")
   parser.add_option("--delete", dest="delete", metavar="REGEX", action="store_true",
                     default=False, help="Actually do a delete. If not specified, just list the keys found that match.")
   (config, args) = parser.parse_args(args)
 
   config_ok = True
-  for flag in ("key", "secret", "maxage", "regex"):
+  for flag in ("key", "secret", "maxage", "regex", "bucket"):
     if getattr(config, flag) is None:
       print >>sys.stderr, "Missing required flag: --%s" % flag
       config_ok = False
@@ -39,7 +41,7 @@ def main(args):
   config.maxage = int(config.maxage)
   config.regex = re.compile(config.regex)
 
-  bucket = s3.get_bucket("logdog-unfuddle-backups")
+  bucket = s3.get_bucket(config.bucket)
   for key in bucket.list():
     mtime = time.mktime(time.strptime(key.last_modified.split(".")[0], "%Y-%m-%dT%H:%M:%S"))
     now = time.time()
