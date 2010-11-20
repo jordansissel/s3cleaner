@@ -4,3 +4,17 @@ with no answers...
 So, here's a script that will clean old s3 entries that match a pattern.
 
 Requires boto.
+
+% python s3cleaner.py --help
+Usage: s3cleaner.py [options]
+
+Options:
+  -h, --help        show this help message and exit
+  --key=KEY         AWS Access Key
+  --secret=SECRET   AWS Access Secret Key
+  --maxage=SECONDS  Max age a key(file) can have before we want to delete it
+  --regex=REGEX     Only consider keys matching this REGEX
+  --bucket=BUCKET   Search for keys in a specific bucket
+  --delete          Actually do a delete. If not specified, just list the keys
+                    found that match.
+
